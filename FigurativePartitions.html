@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Figurative Partitions Game</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1em;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    #controls,
+    #palette,
+    #board {
+      margin: 1em 0;
+    }
+    button {
+      margin: 0.2em;
+      padding: 0.4em 0.8em;
+      font-size: 1em;
+    }
+    #sum {
+      font-size: 1.2em;
+      margin-top: 0.5em;
+      text-align: center;
+      font-weight: bold;
+    }
+    .figure {
+      display: inline-block;
+      margin: 0.5em;
+      text-align: center;
+      vertical-align: top;
+      border: 1px solid #ccc;
+      padding: 0.5em;
+      border-radius: 8px;
+      background-color: #f0f8ff;
+    }
+    .shape {
+      width: 60px;
+      height: 60px;
+      background: #4a90e2;
+      margin-bottom: 0.3em;
+      clip-path: var(--clip);
+    }
+
+  /* pebble = circle */
+  .sides-0 { --clip: circle(50% at 50% 50%); background: #3562f7; }
+
+   /* triangle, square, pentagon, hexagon, heptagon, octagon via clip-path  */
+  .sides-1 { --clip: polygon(50% 0%, 100% 100%, 0% 100%); } 
+  .sides-2 { --clip: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); }
+  .sides-3 { --clip: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); }
+  .sides-4 { --clip: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
+  .sides-5 { --clip: polygon(50% 0%, 85% 19%, 100% 57%, 71% 100%, 29% 100%, 0% 57%, 15% 19%); }
+  .sides-6 { --clip: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); }
+
+    #board-empty {
+      text-align: center;
+      color: #666;
+      font-style: italic;
+      margin-top: 1em;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🎯 Figurative Partitions Game</h1>
+
+  <details style="margin: 1em 0; margin-bottom: 1em;">
+  <summary style="font-weight: bold; font-size: 1.1em;">🧩 How to Play & Tips</summary>
+  <div style="padding: 0.5em 1em;">
+    <h3>🎮 How to play</h3>
+    <ul>
+      <li><strong>Choose a target sum</strong> using the input box</li>
+      <li><strong>Add shapes</strong> by clicking the buttons in the palette (each shape appears only once)</li>
+      <li><strong>Adjust shapes:</strong> click <code>+</code> or <code>–</code> to change their size</li>
+      <li><strong>Remove shapes:</strong> click <code>✕</code> to delete them</li>
+      <li>Every value-changing click counts toward your score!</li>
+      <li>🎯 Reach the exact target to win — with click stats included</li>
+    </ul>
+
+    <h3>💡 Tips</h3>
+    <ul>
+      <li>Pebbles are fixed at value 1</li>
+      <li>Each shape has a unique value formula based on its type and size</li>
+      <li>Tooltips on buttons link to relevant OEIS entries</li>
+      <li>Shape buttons disable when used — plan wisely!</li>
+    </ul>
+  </div>
+</details>
+
+<!-- Target Sum Control -->
+  <div id="controls">
+    <label for="targetInput" style="font-size: 1.3em;"><strong>Target sum:</strong></label>
+    <input type="number" id="targetInput" min="1" value="27" />
+    <button id="setTargetBtn" title="Set a fresh challenge with this target">Set Target</button>
+    <div id="sum"></div>
+  </div>
+
+<!-- Shape Palette -->
+  <div id="palette">
+    <h2>🛠️ Choose a Shape</h2>
+    <button data-n="0">Pebble</button>
+    <button data-n="1">Triangle</button>
+    <button data-n="2">Square</button>
+    <button data-n="3">Pentagon</button>
+    <button data-n="4">Hexagon</button>
+    <button data-n="5">Heptagon</button>
+    <button data-n="6">Octagon</button>
+  </div>
+
+<!-- Counting Board -->
+  <div id="board-section">
+    <h2>🧮 Your Counting Board</h2>
+    <div id="board"></div>
+    <div id="board-empty">Add a shape to begin building your partition.</div>
+  </div>
+
+  <script src="FigurativePartitions.js"></script>
+</body>
+</html>
