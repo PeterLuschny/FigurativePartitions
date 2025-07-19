@@ -12,8 +12,9 @@ let figures: Figure[] = [];
 let nextId = 1;
 let clickCount = 0;
 
-// Compute value for figurate (n, k)
-function computeValue(n: number, k: number): number {
+// Compute value for figurate (n, j)
+function computeValue(n: number, j: number): number {
+  const k = j + 1;
   return n === 0 ? 1 : k + (n * (k - 1) * k) / 2;
 }
 
@@ -80,10 +81,11 @@ function render(): void {
 
     const div = document.createElement("div");
     div.className = "figure";
+    const u = fig.n === 0 ? 1 : fig.n + 2;
     if (fig.n !== 0) {
       div.innerHTML = `
         <div class="shape sides-${fig.n}"></div>
-        <div>n=${fig.n}, k=${fig.k}, v=${fig.v}</div>
+        <div>S=${u}, M=${fig.k}, V=${fig.v}</div>
       `;
         div.innerHTML += `
         <button data-action="inc" data-id="${fig.id}">+</button>
@@ -92,7 +94,7 @@ function render(): void {
     } else {
       div.innerHTML = `
         <div class="shape sides-${fig.n}"></div>
-        <div style="font-style: italic;">Pebble v = 1  </div>
+        <div style="font-style: italic;">Pebble V = 1  </div>
       `;
     }
     
