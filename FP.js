@@ -3,8 +3,9 @@ let figures = [];
 let nextId = 1;
 let clickCount = 0;
 let activeId = null;
-// compute value (Pebble n=0 is always 1)
-function computeValue(n, k) {
+// Compute value for figurate(n, j), (Pebble n=0 is always 1)
+function computeValue(n, j) {
+    const k = j + 1;
     return n === 0 ? 1 : k + (n * (k - 1) * k) / 2;
 }
 // which shapes are already on-board

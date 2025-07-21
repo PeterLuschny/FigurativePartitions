@@ -11,8 +11,9 @@ let nextId       = 1;
 let clickCount   = 0;
 let activeId: number | null = null;
 
-// compute value (Pebble n=0 is always 1)
-function computeValue(n: number, k: number): number {
+// Compute value for figurate(n, j), (Pebble n=0 is always 1)
+function computeValue(n: number, j: number): number {
+  const k = j + 1;
   return n === 0 ? 1 : k + (n * (k - 1) * k) / 2;
 }
 
